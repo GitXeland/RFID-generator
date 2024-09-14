@@ -4,10 +4,6 @@ const process = require('process')
 const { authenticate } = require('@google-cloud/local-auth')
 const { google } = require('googleapis')
 
-function delay(time) {
-  return new Promise((resolve) => setTimeout(resolve, time))
-}
-
 const mainFileId = '1c45uKcOPaFV4T58v9P0IvjLucDWiTt4GjOY2kv6w4YM'
 
 // If modifying these scopes, delete token.json.
@@ -95,7 +91,7 @@ async function getSpreadsheetData(spreadsheetId, range) {
     }
     return rows
   } catch (e) {
-    console.log(e.errors[0].message)
+    console.log(e)
     return undefined
   }
 }
@@ -103,7 +99,6 @@ async function getSpreadsheetData(spreadsheetId, range) {
 async function writeCell(spreadsheetId, range, text) {
   let auth = await authorize()
   const sheets = google.sheets({ version: 'v4', auth })
-  await delay(1000)
   try {
     sheets.spreadsheets.values.update({
       spreadsheetId,
@@ -120,7 +115,6 @@ async function writeCell(spreadsheetId, range, text) {
 async function appendRows(spreadsheetId, range, rows) {
   let auth = await authorize()
   const sheets = google.sheets({ version: 'v4', auth })
-  await delay(1000)
   try {
     sheets.spreadsheets.values.append({
       spreadsheetId,
@@ -139,19 +133,23 @@ async function appendRows(spreadsheetId, range, rows) {
  * @param {OAuth2Client} authClient An authorized OAuth2 client.
  */
 async function getFileByName(name) {
-  let auth = await authorize()
-  const drive = google.drive({ version: 'v3', auth: auth })
-  const res = await drive.files.list({
-    q: `name = '${name}'`,
-    pageSize: 10,
-    fields: 'nextPageToken, files(id, name)',
-  })
-  const files = res.data.files
-  if (files.length === 0) {
-    console.log(`File not found : ${name}`)
-    return
+  try {
+    let auth = await authorize()
+    const drive = google.drive({ version: 'v3', auth: auth })
+    const res = await drive.files.list({
+      q: `name = "${name}"`,
+      pageSize: 10,
+      fields: 'nextPageToken, files(id, name)',
+    })
+    const files = res.data.files
+    if (files.length === 0) {
+      console.log(`File not found : ${name}`)
+      return
+    }
+    return files[0]
+  } catch (e) {
+    console.log(e)
   }
-  return files[0]
 }
 
 async function getMembers(club) {
@@ -201,9 +199,38 @@ async function assignRFID(member) {
   }
 }
 
+async function assignMember(member) {
+  // get spreadsheet and verify that RFID is in the correct column
+  file = await getFileByName(`licencié.e.s ${member.Club}`)
+  if (file) {
+    let data = await getSpreadsheetData(file.id, 'licencié.e.s!A1:K')
+    if (data) {
+      const headers = data.shift()
+      if (headers[6] !== 'RFID') {
+        console.log(`The RFID column has been moved in the gsheet licencié.e.s ${member.Club}`)
+        return
+      }
+      // write the RFID in the corresponding cell
+
+      await writeCell(file.id, `Licencié.e.s!B${Number(member.Club_Id) + 1}`, member.Prénom)
+      await writeCell(file.id, `Licencié.e.s!C${Number(member.Club_Id) + 1}`, member.Nom)
+      await writeCell(file.id, `Licencié.e.s!D${Number(member.Club_Id) + 1}`, member.Tel)
+      await writeCell(file.id, `Licencié.e.s!E${Number(member.Club_Id) + 1}`, member.Mail)
+      await writeCell(file.id, `Licencié.e.s!F${Number(member.Club_Id) + 1}`, member.Sexe)
+      await writeCell(file.id, `Licencié.e.s!G${Number(member.Club_Id) + 1}`, member.RFID)
+      await writeCell(file.id, `Licencié.e.s!H${Number(member.Club_Id) + 1}`, member['Date RFID'])
+      await writeCell(file.id, `Licencié.e.s!I${Number(member.Club_Id) + 1}`, member.Paiement)
+      await writeCell(file.id, `Licencié.e.s!J${Number(member.Club_Id) + 1}`, member.Pays)
+    }
+  }
+}
+
 async function markPayments(payments) {
   // add a line for the payment
-  let rows = payments.map((p) => [p.time, p.order.id, p.club, p.nbRFID * 10 + '€', p.nbRFID])
+  let rows = payments.map((p) => {
+    if (p.nbRFID) return [p.time, p.order.id, p.club, p.nbRFID * 10 + '€', p.nbRFID]
+    else return [p.date, p.order.id, 'Fédération', '10€', 1]
+  })
   await appendRows(mainFileId, `suivi des paiements!A1`, rows)
 }
 
@@ -235,6 +262,7 @@ module.exports = {
   getMembers,
   addMembers,
   assignRFID,
+  assignMember,
   getTreatedPayments,
   markPayments,
 }

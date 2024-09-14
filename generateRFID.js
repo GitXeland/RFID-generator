@@ -3,7 +3,7 @@ const { v5 } = require('uuid')
 const genUid = (seed) => v5(seed, v5.URL)
 
 module.exports = (member) => {
-  let id = member.id
+  let id = member.Id
   let firstname = member['Prénom']
   let lastname = member.Nom
 

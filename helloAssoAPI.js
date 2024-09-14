@@ -133,6 +133,24 @@ const getItemById = async (itemId) => {
   return item || `The iten ${itemId} has not been found.`
 }
 
+const getItems = async (items) => {
+  let { access_token } = await authorize()
+
+  // console.log(`/items/${itemId}?withDetails=true`)
+  let returnItems = []
+  for (let item of items) {
+    let { data } = await axios.get(`https://api.helloasso.com/v5/items/${item.id}?withDetails=true`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    })
+
+    returnItems.push(data)
+  }
+
+  return returnItems
+}
+
 const getFormPayments = async (form) => {
   let { access_token } = await authorize()
 
@@ -159,10 +177,38 @@ const getFormPayments = async (form) => {
   return payments
 }
 
+const getFormOrders = async (form) => {
+  let { access_token } = await authorize()
+
+  let { formType, formSlug } = form
+  let maxIndex
+  let payments = []
+  let index = 1
+
+  do {
+    // console.log(`/forms/${formType}/${formSlug}/orders?pageIndex=${index}&pageSize=100`)
+    let { data } = await axios.get(
+      `https://api.helloasso.com/v5/organizations/roundnet-france/forms/${formType}/${formSlug}/orders?pageIndex=${index}&pageSize=100`,
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    )
+    maxIndex = data.pagination.totalPages
+    index++
+    payments = [...payments, ...data.data]
+  } while (index <= maxIndex)
+
+  return payments
+}
+
 module.exports = {
   getPayments,
   getFormByName,
   getPaymentByOrderId,
   getItemById,
+  getItems,
   getFormPayments,
+  getFormOrders,
 }
