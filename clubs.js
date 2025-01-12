@@ -93,9 +93,7 @@ let generateClubRFID = async () => {
       console.log(`The payment ${paymentID.green} from ${club.green} has been used to generate ${String(nbRFID).green} RFIDs\n`)
     } else {
       console.log(
-        `The payment ${paymentID.red} from ${club.red} is too ${
-          membersToRFID.length < nbRFID ? 'big' : 'small'
-        } compared to the number of RFID requested.`
+        `The payment ${paymentID.red} from ${club.red} is too ${membersToRFID.length < nbRFID ? 'big' : 'small'} compared to the number of RFID requested.`
       )
       console.log(`${String(membersToRFID.length).red} asked and ${String(nbRFID).red} payed. Contact ${club.red} to fix the mistake.\n`)
     }
