@@ -59,8 +59,8 @@ let createContact = async (player) => {
       updateContactwithRFID(player.Mail, player.RFID)
     } else {
       {
-        console.log(e.message)
         console.log(e.response.data.message)
+        console.log(player.Mail)
       }
     }
   }
