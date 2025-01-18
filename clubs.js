@@ -2,29 +2,29 @@ require('colors')
 const fs = require('fs').promises
 const path = require('path')
 const process = require('process')
+require('dotenv').config()
+
+const { CLUBFORM } = process.env
+const RFIDS_PATH = path.join(process.cwd(), 'RFIDs.json')
 
 const { getItemById, getItems, getFormByName, getFormPayments } = require('./helloAssoAPI')
-const { getMembers, assignRFID, markPayments, getTreatedPayments, addMembers } = require('./googleAPI')
-const { createContact, sendMail } = require('./emailAPI')
+const { getMembers, assignRFID, markPayments, getTreatedPayments, addMembers, getFileByName } = require('./googleAPI')
+const { createContact, sendMail } = require('./brevoAPI')
 const generateRFID = require('./generateRFID')
 
 function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time))
 }
 
-let generateClubRFID = async () => {
-  // const GOOGLE_PATH = path.join(process.cwd(), 'googleAPI', 'token.json')
-  // await fs.writeFile(GOOGLE_PATH, '')
-  const HELLOASSO_PATH = path.join(process.cwd(), 'helloassoAPI', 'token.json')
-  await fs.writeFile(HELLOASSO_PATH, JSON.stringify({}))
-
-  const RFIDS_PATH = path.join(process.cwd(), 'RFIDS.json')
+async function getRFIDs() {
   const content = await fs.readFile(RFIDS_PATH)
   let RFIDS = JSON.parse(content)
-  let globalId = RFIDS.length + 1
+  return RFIDS
+}
 
+async function getUntreatedPayments() {
   //* Get all untreated payments to date
-  let form = await getFormByName('Saison 2024 - Licences individuelles Roundnet France')
+  let form = await getFormByName(CLUBFORM)
   let payments = await getFormPayments(form)
   let treatedPayments = await getTreatedPayments()
   treatedPayments = treatedPayments.map((tp) => tp.Paiement)
@@ -33,9 +33,24 @@ let generateClubRFID = async () => {
   // console.table(notTreatedPayments, ['date', 'amount'])
   // let notTreatedPayments = [{ id: '12345678' }]
   if (notTreatedPayments.length == 0) console.log('No club payments found')
+  return notTreatedPayments
+}
+
+let generateClubRFID = async () => {
+  // const GOOGLE_PATH = path.join(process.cwd(), 'googleAPI', 'token.json')
+  // await fs.writeFile(GOOGLE_PATH, '')
+  const HELLOASSO_PATH = path.join(process.cwd(), 'helloassoAPI', 'token.json')
+  await fs.writeFile(HELLOASSO_PATH, JSON.stringify({}))
+
+  let RFIDS = await getRFIDs()
+  let globalId = RFIDS.length + 1
+
+  let notTreatedPayments = await getUntreatedPayments()
+  if (notTreatedPayments.length == 0) return
 
   //* For each payement not treated yet
   let newMembers = []
+  let activatedMembers = []
   let newPayements = []
   for (let payment of notTreatedPayments) {
     //* Get payement info
@@ -61,28 +76,39 @@ let generateClubRFID = async () => {
 
     //* Find list of members getting a RFID
     let members = await getMembers(club)
-    members = members.filter((m) => m.Nom)
+    members = members.filter((m) => m.Mail) //! il faut avoir un mail pour avoir une licence (RFID)
     let membersToRFID = members?.filter((m) => m.Paiement == paymentID)
     // console.table(membersToRFID)
     //* If amount payed equals the number of RFID asked
     if (membersToRFID.length === nbRFID) {
       let assignments = []
       for (let member of membersToRFID) {
-        //* update member
-        member.Club_Id = member.Id
-        member.Club = club
-        member.Id = globalId++
-        member.RFID = generateRFID(member)
-        member['Date RFID'] = new Date().toString()
-        newMembers.push(member)
+        //* update member if already in database
+        let mail = member.Mail
+        let oldMember = RFIDS.find((m) => m.Mail == mail)
+        if (oldMember) {
+          RFIDS.find((m) => m.Mail == mail).actif = true
+          RFIDS.find((m) => m.Mail == mail).Club_Id = member.Id
+          member = oldMember
+          activatedMembers.push(member)
+        } else {
+          //* create new member
+          member.Club_Id = member.Id
+          member.Club = club
+          member.Id = globalId++
+          member.RFID = generateRFID(member)
+          member.actif = true
+          member['Date RFID'] = new Date().toString()
+          newMembers.push(member)
+          activatedMembers.push(member)
+
+          //* create contact in the email list
+          await createContact(member)
+        }
 
         //* write RFID in the google sheet
         await delay(3000)
         assignments.push(assignRFID(member))
-
-        //* send mail
-        await createContact(member)
-        // sendMail(member)
       }
       await Promise.all(assignments)
 
@@ -98,7 +124,7 @@ let generateClubRFID = async () => {
       console.log(`${String(membersToRFID.length).red} asked and ${String(nbRFID).red} payed. Contact ${club.red} to fix the mistake.\n`)
     }
   }
-  console.table(newMembers, ['Prénom', 'Nom', 'RFID', 'Club'])
+  console.table(activatedMembers, ['Prénom', 'Nom', 'RFID', 'Club'])
 
   //* mark new payments down as treated
   await markPayments(newPayements)
@@ -108,7 +134,7 @@ let generateClubRFID = async () => {
   await fs.writeFile(RFIDS_PATH, JSON.stringify(RFIDS, null, 2))
 
   //*save new member into online database
-  await addMembers(newMembers)
+  await addMembers(activatedMembers)
 }
 
 module.exports = {

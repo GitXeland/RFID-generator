@@ -5,7 +5,7 @@ const process = require('process')
 
 const { getItemById, getItems, getFormByName, getFormPayments } = require('./helloAssoAPI')
 const { getMembers, assignMember, markPayments, getTreatedPayments, addMembers } = require('./googleAPI')
-const { createContact, sendMail } = require('./emailAPI')
+const { createContact, sendMail } = require('./brevoAPI')
 const generateRFID = require('./generateRFID')
 
 function delay(time) {
@@ -25,7 +25,7 @@ let generateIndivRFID = async () => {
   let nb_RF_RFIDs = RFIDS.filter((member) => member.Club == 'Fédération').length + 1
 
   //* Get all untreated payments to date
-  let form = await getFormByName('Saison 2024 - Licence individuelle sans club')
+  let form = await getFormByName('Saison 2025 - Licence individuelle sans club')
   let payments = await getFormPayments(form)
   let treatedPayments = await getTreatedPayments()
   treatedPayments = treatedPayments.map((tp) => tp.Paiement)
@@ -33,11 +33,12 @@ let generateIndivRFID = async () => {
   let notTreatedPayments = payments.filter((p) => !treatedPayments.includes(String(p.order.id))).reverse()
   // console.table(notTreatedPayments, ['date', 'amount'])
   // let notTreatedPayments = [{ id: '12345678' }]
-  if (notTreatedPayments.length == 0) console.log('No individual payments found')
+  if (notTreatedPayments.length == 0) return console.log('No individual payments found')
 
   //* For each payement not treated yet
   let newMembers = []
   let newPayements = []
+  let activatedMembers = []
   let assignments = []
 
   for (let payment of notTreatedPayments) {
@@ -51,26 +52,35 @@ let generateIndivRFID = async () => {
     const gender = customFields?.find((cF) => cF.name == 'Genre / Gender')?.answer
     const orderId = order.id
 
-    const member = {
-      Id: globalId++,
-      Club_Id: nb_RF_RFIDs++,
-      Prénom: firstName,
-      Nom: lastName,
-      Tel: phone,
-      Mail: email,
-      Sexe: gender,
-      Club: 'Fédération',
-      'Date RFID': new Date().toString(),
-      Paiement: String(orderId),
-      Pays: country,
+    //* update member if already in database
+    let oldMember = RFIDS.find((m) => m.Mail == email)
+
+    let member
+    if (oldMember) {
+      RFIDS.find((m) => m.Mail == email).actif = true
+      RFIDS.find((m) => m.Mail == email).Club_Id = member.Id
+      member = oldMember
+    } else {
+      member = {
+        Id: globalId++,
+        Club_Id: nb_RF_RFIDs++,
+        Prénom: firstName,
+        Nom: lastName,
+        Tel: phone,
+        Mail: email,
+        Sexe: gender,
+        Club: 'Fédération',
+        'Date RFID': new Date().toString(),
+        Paiement: String(orderId),
+        Pays: country,
+      }
+
+      member.RFID = generateRFID(member)
+      await createContact(member)
+      newMembers.push(member)
     }
-
-    member.RFID = generateRFID(member)
-
-    await createContact(member)
     sendMail(member)
-
-    newMembers.push(member)
+    activatedMembers.push(member)
     newPayements.push(payment)
 
     // add member to fédération sheet
@@ -83,7 +93,7 @@ let generateIndivRFID = async () => {
   }
   await Promise.all(assignments)
 
-  console.table(newMembers, ['Prénom', 'Nom', 'RFID', 'Pays'])
+  console.table(activatedMembers, ['Prénom', 'Nom', 'RFID', 'Pays'])
 
   //* mark new payments down as treated
   await markPayments(newPayements)
@@ -93,7 +103,7 @@ let generateIndivRFID = async () => {
   await fs.writeFile(RFIDS_PATH, JSON.stringify(RFIDS, null, 2))
 
   //*save new member into online database
-  await addMembers(newMembers)
+  await addMembers(activatedMembers)
 }
 
 module.exports = {
