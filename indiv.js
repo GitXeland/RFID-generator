@@ -68,7 +68,7 @@ let generateIndivRFID = async () => {
         Nom: lastName,
         Tel: phone,
         Mail: email,
-        Sexe: gender,
+        Genre: gender,
         Club: 'Fédération',
         'Date RFID': new Date().toString(),
         Paiement: String(orderId),

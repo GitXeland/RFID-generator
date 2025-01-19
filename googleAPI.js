@@ -249,7 +249,7 @@ async function assignMember(member) {
       await writeCell(file.id, `Licencié.e.s!C${Number(member.Club_Id) + 1}`, member.Nom)
       await writeCell(file.id, `Licencié.e.s!D${Number(member.Club_Id) + 1}`, member.Tel)
       await writeCell(file.id, `Licencié.e.s!E${Number(member.Club_Id) + 1}`, member.Mail)
-      await writeCell(file.id, `Licencié.e.s!F${Number(member.Club_Id) + 1}`, member.Sexe)
+      await writeCell(file.id, `Licencié.e.s!F${Number(member.Club_Id) + 1}`, member.Genre)
       await writeCell(file.id, `Licencié.e.s!G${Number(member.Club_Id) + 1}`, member.RFID)
       await writeCell(file.id, `Licencié.e.s!H${Number(member.Club_Id) + 1}`, member['Date RFID'])
       await writeCell(file.id, `Licencié.e.s!I${Number(member.Club_Id) + 1}`, member.Paiement)
@@ -287,7 +287,7 @@ async function getTreatedPayments() {
 }
 
 async function addMembers(members) {
-  let rows = members.map((m) => [m.Id, m.Club_Id, m.Prénom, m.Nom, m.Tel, m.Mail, m.Sexe, m.Club, m.RFID, m['Date RFID'], m.Paiement])
+  let rows = members.map((m) => [m.Id, m.Club_Id, m.Prénom, m.Nom, m.Tel, m.Mail, m.Genre, m.Club, m.RFID, m['Date RFID'], m.Paiement])
   await appendRows(mainFileId, `licencié.e.s!A1`, rows)
 }
 

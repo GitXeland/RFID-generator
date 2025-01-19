@@ -83,6 +83,13 @@ let generateClubRFID = async () => {
     if (membersToRFID.length === nbRFID) {
       let assignments = []
       for (let member of membersToRFID) {
+        //* check that member has a mail, name, firstname and its gender is M or F
+        if (!member.Mail || !member.Nom || !member.Prénom || !['M', 'F'].includes(member.Genre)) {
+          console.log(`Member ${member.Nom} ${member.Prénom} from ${club} has no mail or name or firstname
+          or has an incorrect gender".`)
+          continue
+        }
+
         //* update member if already in database
         let mail = member.Mail
         let oldMember = RFIDS.find((m) => m.Mail == mail)
