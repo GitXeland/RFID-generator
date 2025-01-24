@@ -162,11 +162,12 @@ async function getFolderName(fileId, auth) {
  * @param {OAuth2Client} authClient An authorized OAuth2 client.
  */
 async function getFileByName(name) {
+  const folderId = '1pWJyhrLbuVX2Twbvx6psRxdCFJzRyTdR' //! This is the id for the 2025 folder
   try {
     let auth = await authorize()
     const drive = google.drive({ version: 'v3', auth: auth })
     const res = await drive.files.list({
-      q: `name = "${name}"`,
+      q: `'${folderId}' in parents and name = '${name}'`,
       pageSize: 10,
       fields: 'nextPageToken, files(id, name)',
     })
@@ -174,12 +175,8 @@ async function getFileByName(name) {
     if (files.length === 0) {
       console.log(`File not found : ${name}`)
       return
-    }
-    for (let file of files) {
-      let parent = await getFolderName(file.id, auth)
-      if (parent === 'Licenciés par clubs - 2025') {
-        return file
-      }
+    } else {
+      return files[0]
     }
   } catch (e) {
     console.log(e)
@@ -211,7 +208,7 @@ async function getMembers(club) {
       })
       return formatedData
     }
-  } else return []
+  } else return
 }
 
 async function assignRFID(member) {
