@@ -6,8 +6,6 @@ const { default: axios } = require('axios')
 
 const { BREVO_API_KEY } = process.env
 
-let getContactInfo
-
 let updateContactwithRFID = async (mail, RFID) => {
   try {
     const { data } = await axios.put(

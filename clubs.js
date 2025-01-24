@@ -123,7 +123,7 @@ let generateClubRFID = async () => {
         //* update member if already in database
         let mail = member.Mail
         let oldMember = RFIDS.find((m) => m.Mail == mail)
-        if (oldMember) {
+        if (oldMember && !oldMember.actif) {
           RFIDS.find((m) => m.Mail == mail).actif = true
           RFIDS.find((m) => m.Mail == mail).Prénom = member.Prénom
           RFIDS.find((m) => m.Mail == mail).Nom = member.Nom
@@ -134,6 +134,9 @@ let generateClubRFID = async () => {
           RFIDS.find((m) => m.Mail == mail).Tel = member.Tel
           member = RFIDS.find((m) => m.Mail == mail)
           activatedMembers.push(member)
+        } else if (oldMember && oldMember.actif) {
+          console.log(`Member ${member.Prénom} ${member.Nom} already active in 2025, contact ${club} to warn the player.`)
+          continue
         } else {
           //* create new member
           member.Club_Id = member.Id
