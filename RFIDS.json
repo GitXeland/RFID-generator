@@ -64,10 +64,10 @@
     "Genre": "M",
     "RFID": "FRC871279E",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "2",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "33",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 6,
@@ -78,10 +78,10 @@
     "Genre": "F",
     "RFID": "FRAAC0F02A",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "3",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "2",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 7,
@@ -92,10 +92,10 @@
     "Genre": "M",
     "RFID": "FRA0BBDB01",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "4",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "11",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 8,
@@ -120,10 +120,10 @@
     "Genre": "F",
     "RFID": "FR5C26F955",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "6",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "17",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 10,
@@ -134,10 +134,10 @@
     "Genre": "M",
     "RFID": "FR8953DB0C",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "7",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "3",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 11,
@@ -176,10 +176,10 @@
     "Genre": "F",
     "RFID": "FRAACE8732",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "10",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "31",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 14,
@@ -190,10 +190,10 @@
     "Genre": "F",
     "RFID": "FRC7563041",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "11",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "10",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 15,
@@ -204,10 +204,10 @@
     "Genre": "F",
     "RFID": "FR2C49E0CE",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "12",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "19",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 16,
@@ -218,10 +218,10 @@
     "Genre": "M",
     "RFID": "FR838561F5",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "13",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "1",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 17,
@@ -260,10 +260,10 @@
     "Genre": "M",
     "RFID": "FREE36066D",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "16",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "27",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 20,
@@ -330,10 +330,10 @@
     "Genre": "M",
     "RFID": "FR3E9D16B9",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "21",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "37",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 25,
@@ -344,10 +344,10 @@
     "Genre": "F",
     "RFID": "FR17EBEBD0",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "22",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "12",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 26,
@@ -372,10 +372,10 @@
     "Genre": "F",
     "RFID": "FR8F709682",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "24",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "20",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 28,
@@ -386,10 +386,10 @@
     "Genre": "F",
     "RFID": "FR2139BFF7",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "25",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "21",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 29,
@@ -414,10 +414,10 @@
     "Genre": "M",
     "RFID": "FRE52DB97B",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "27",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "7",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 31,
@@ -428,10 +428,10 @@
     "Genre": "M",
     "RFID": "FRFE4D8F44",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "28",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "22",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 32,
@@ -456,10 +456,10 @@
     "Genre": "M",
     "RFID": "FR04D1173E",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "30",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "16",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 34,
@@ -512,10 +512,10 @@
     "Genre": "F",
     "RFID": "FRE63BF7A7",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "34",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "30",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 38,
@@ -526,10 +526,10 @@
     "Genre": "M",
     "RFID": "FR77C591ED",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "35",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "4",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 39,
@@ -540,10 +540,10 @@
     "Genre": "M",
     "RFID": "FR8C745635",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "36",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "24",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 40,
@@ -568,10 +568,10 @@
     "Genre": "M",
     "RFID": "FR02F49113",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "38",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "26",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 42,
@@ -582,10 +582,10 @@
     "Genre": "M",
     "RFID": "FR02D0AA56",
     "Date RFID": "Thu Nov 30 2023 16:11:38 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "74938145",
-    "Club_Id": "39",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "34",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 43,
@@ -1555,17 +1555,17 @@
   },
   {
     "Id": 112,
-    "Prénom": "Heintzé",
-    "Nom": "Paul",
-    "Tel": "",
+    "Prénom": "Paul",
+    "Nom": "Heintzé",
+    "Tel": "06 82 30 90 60",
     "Mail": "pheintze@orange.fr",
     "Genre": "M",
     "RFID": "FREED1C4F6",
     "Date RFID": "Wed Dec 20 2023 12:36:16 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "76373750",
-    "Club_Id": "42",
-    "Club": "Roundnet Paris",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "15",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 113,
@@ -1800,24 +1800,24 @@
     "Genre": "M",
     "RFID": "FR07EE56D2",
     "Date RFID": "Tue Jan 02 2024 15:37:25 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "77203408",
-    "Club_Id": "40",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "8",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 130,
     "Prénom": "Boris",
     "Nom": "Florentin",
-    "Tel": " 06 37 22 07 41",
+    "Tel": "06 37 22 07 41",
     "Mail": "boris.florentin@gmail.com",
     "Genre": "M",
     "RFID": "FRE459F319",
     "Date RFID": "Tue Jan 02 2024 15:37:28 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "77203408",
-    "Club_Id": "41",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "28",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 131,
@@ -1828,10 +1828,10 @@
     "Genre": "M",
     "RFID": "FR2385B9AC",
     "Date RFID": "Tue Jan 02 2024 15:37:32 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "77203408",
-    "Club_Id": "42",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "6",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 132,
@@ -4782,10 +4782,10 @@
     "Genre": "F",
     "RFID": "FRB3E653D3",
     "Date RFID": "Fri Feb 02 2024 20:00:37 GMT+0100 (heure normale d’Europe centrale)",
-    "Paiement": "80053509",
-    "Club_Id": "45",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "35",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 343,
@@ -9073,10 +9073,10 @@
     "Genre": "M",
     "RFID": "FR04DBB475",
     "Date RFID": "Tue Apr 30 2024 12:39:07 GMT+0200 (heure d’été d’Europe centrale)",
-    "Paiement": "88797285",
-    "Club_Id": "46",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "36",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 644,
@@ -9094,17 +9094,17 @@
   },
   {
     "Id": 645,
-    "Prénom": "Anthony ",
-    "Nom": "Gelinso ",
+    "Prénom": "Anthony",
+    "Nom": "Gelinso",
     "Tel": "06 72 56 89 95",
     "Mail": "deety@hotmail.fr",
     "Genre": "M",
     "RFID": "FR45399270",
     "Date RFID": "Tue Apr 30 2024 12:39:13 GMT+0200 (heure d’été d’Europe centrale)",
-    "Paiement": "88797285",
-    "Club_Id": "48",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "13",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 646,
@@ -11825,10 +11825,10 @@
     "Genre": "M",
     "RFID": "FR9933A88B",
     "Date RFID": "Mon Sep 30 2024 16:07:13 GMT+0200 (Central European Summer Time)",
-    "Paiement": "104291515",
-    "Club_Id": "53",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "25",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 832,
@@ -12161,10 +12161,10 @@
     "Genre": "M",
     "RFID": "FR5E5601F2",
     "Date RFID": "Thu Oct 03 2024 10:33:16 GMT+0200 (Central European Summer Time)",
-    "Paiement": "104756544",
-    "Club_Id": "55",
-    "Club": "Roundnet Clermont-Ferrand",
-    "actif": false
+    "Paiement": "117030632",
+    "Club_Id": "5",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
   },
   {
     "Id": 856,
@@ -12598,6 +12598,90 @@
     "Paiement": "117169276",
     "Club_Id": "14",
     "Club": "Dijon Roundnet",
+    "actif": true
+  },
+  {
+    "Id": 887,
+    "Prénom": "Charles",
+    "Nom": "Cristau",
+    "Tel": "07 81 88 59 97",
+    "Mail": "charlescristau@gmail.com",
+    "Genre": "M",
+    "RFID": "FRB55A88A1",
+    "Date RFID": "Fri Jan 24 2025 11:19:49 GMT+0100 (Central European Standard Time)",
+    "Paiement": "117030632",
+    "Club_Id": "9",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
+  },
+  {
+    "Id": 888,
+    "Prénom": "Aurélien",
+    "Nom": "Chevalier",
+    "Tel": "07 81 69 65 93",
+    "Mail": "63a.chevalier@gmail.com",
+    "Genre": "M",
+    "RFID": "FR04E4D470",
+    "Date RFID": "Fri Jan 24 2025 11:20:05 GMT+0100 (Central European Standard Time)",
+    "Paiement": "117030632",
+    "Club_Id": "14",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
+  },
+  {
+    "Id": 889,
+    "Prénom": "Vianney",
+    "Nom": "Couturier",
+    "Tel": "06 23 77 69 35",
+    "Mail": "vianney.couturier@gmail.com",
+    "Genre": "M",
+    "RFID": "FRB006C42D",
+    "Date RFID": "Fri Jan 24 2025 11:20:17 GMT+0100 (Central European Standard Time)",
+    "Paiement": "117030632",
+    "Club_Id": "18",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
+  },
+  {
+    "Id": 890,
+    "Prénom": "Mahsa",
+    "Nom": "Saber",
+    "Tel": "07 73 82 09 28",
+    "Mail": "mahsa.saber20@gmail.com",
+    "Genre": "F",
+    "RFID": "FR99D1E516",
+    "Date RFID": "Fri Jan 24 2025 11:20:32 GMT+0100 (Central European Standard Time)",
+    "Paiement": "117030632",
+    "Club_Id": "23",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
+  },
+  {
+    "Id": 891,
+    "Prénom": "Laetitia",
+    "Nom": "Fradetal",
+    "Tel": "06 60 17 96 70",
+    "Mail": "laetitiafradetal@yahoo.fr",
+    "Genre": "F",
+    "RFID": "FR605DD1E7",
+    "Date RFID": "Fri Jan 24 2025 11:20:50 GMT+0100 (Central European Standard Time)",
+    "Paiement": "117030632",
+    "Club_Id": "29",
+    "Club": "Roundnet Clermont Ferrand",
+    "actif": true
+  },
+  {
+    "Id": 892,
+    "Prénom": "Florian",
+    "Nom": "Pernollet",
+    "Tel": "06 25 75 97 26",
+    "Mail": "florianpernollet@hotmail.fr",
+    "Genre": "M",
+    "RFID": "FRC30081EC",
+    "Date RFID": "Fri Jan 24 2025 11:20:59 GMT+0100 (Central European Standard Time)",
+    "Paiement": "117030632",
+    "Club_Id": "32",
+    "Club": "Roundnet Clermont Ferrand",
     "actif": true
   }
 ]
