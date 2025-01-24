@@ -79,24 +79,60 @@ let generateClubRFID = async () => {
     members = members.filter((m) => m.Mail) //! il faut avoir un mail pour avoir une licence (RFID)
     let membersToRFID = members?.filter((m) => m.Paiement == paymentID)
     // console.table(membersToRFID)
+
+    //* Check that all members have a unique mail : else pass the club
+    let duplicateMails = membersToRFID.filter((m) => membersToRFID.filter((m2) => m2.Mail == m.Mail).length > 1)
+    if (duplicateMails.length > 0) {
+      console.log(`Members from ${club} have duplicate mails :`)
+      console.table(duplicateMails, ['Prénom', 'Nom', 'Mail'])
+      console.log(`Contact ${club} to fix the mistake.\n`)
+      continue
+    }
+
+    //* Check that all members have a mail, correct format : else pass the club
+    let wrongMails = membersToRFID.filter((m) => !m.Mail || !m.Mail.includes('@') || !m.Mail.includes('.'))
+    if (wrongMails.length > 0) {
+      console.log(`Members from ${club} have wrong mails :`)
+      console.table(wrongMails, ['Prénom', 'Nom', 'Mail'])
+      console.log(`Contact ${club} to fix the mistake.\n`)
+      continue
+    }
+
+    //* Check that all members have a firstname and a name : else pass the club
+    let wrongNames = membersToRFID.filter((m) => !m.Nom || !m.Prénom)
+    if (wrongNames.length > 0) {
+      console.log(`Members from ${club} have no name or firstname :`)
+      console.table(wrongNames, ['Id', 'Prénom', 'Nom'])
+      console.log(`Contact ${club} to fix the mistake.\n`)
+      continue
+    }
+
+    //* Check that all members have a gender equal to M or F : else pass the club
+    let wrongGenders = membersToRFID.filter((m) => !['M', 'F'].includes(m.Genre))
+    if (wrongGenders.length > 0) {
+      console.log(`Members from ${club} have something else than M or F as gender :`)
+      console.table(wrongGenders, ['Id', 'Prénom', 'Nom', 'Genre'])
+      console.log(`Contact ${club} to fix the mistake.\n`)
+      continue
+    }
+
     //* If amount payed equals the number of RFID asked
     if (membersToRFID.length === nbRFID) {
       let assignments = []
       for (let member of membersToRFID) {
-        //* check that member has a mail, name, firstname and its gender is M or F
-        if (!member.Mail || !member.Nom || !member.Prénom || !['M', 'F'].includes(member.Genre)) {
-          console.log(`Member ${member.Nom} ${member.Prénom} from ${club} has no mail or name or firstname
-          or has an incorrect gender".`)
-          continue
-        }
-
         //* update member if already in database
         let mail = member.Mail
         let oldMember = RFIDS.find((m) => m.Mail == mail)
         if (oldMember) {
           RFIDS.find((m) => m.Mail == mail).actif = true
+          RFIDS.find((m) => m.Mail == mail).Prénom = member.Prénom
+          RFIDS.find((m) => m.Mail == mail).Nom = member.Nom
+          RFIDS.find((m) => m.Mail == mail).Genre = member.Genre
+          RFIDS.find((m) => m.Mail == mail).Paiement = member.Paiement
           RFIDS.find((m) => m.Mail == mail).Club_Id = member.Id
-          member = oldMember
+          RFIDS.find((m) => m.Mail == mail).Club = club
+          RFIDS.find((m) => m.Mail == mail).Tel = member.Tel
+          member = RFIDS.find((m) => m.Mail == mail)
           activatedMembers.push(member)
         } else {
           //* create new member
