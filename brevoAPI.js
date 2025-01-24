@@ -52,13 +52,12 @@ let createContact = async (player) => {
       }
     )
   } catch (e) {
-    if (e.response.data.message == 'email is missing in to') {
-      console.log('The mail could ne be sent because email is missing')
-    } else if (e.response.data.message == 'Contact already exist') {
-      console.log('Contact already existing, adding RFID')
+    if (e.response.data.message == 'Unable to create contact, email is already associated with another Contact') {
+      console.log('Contact already existing, updating RFID')
       updateContactwithRFID(player.Mail, player.RFID)
     } else {
       {
+        console.log('Brevo API error (not treated) :')
         console.log(e.response.data.message)
         console.log(player.Mail)
       }
