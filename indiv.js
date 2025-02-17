@@ -58,7 +58,12 @@ let generateIndivRFID = async () => {
     let member
     if (oldMember) {
       RFIDS.find((m) => m.Mail == email).actif = true
-      RFIDS.find((m) => m.Mail == email).Club_Id = member.Id
+      RFIDS.find((m) => m.Mail == email).Prénom = firstName
+      RFIDS.find((m) => m.Mail == email).Nom = lastName
+      RFIDS.find((m) => m.Mail == email).Genre = gender
+      RFIDS.find((m) => m.Mail == email).Paiement = String(orderId)
+      RFIDS.find((m) => m.Mail == email).Club = 'Fédération'
+      RFIDS.find((m) => m.Mail == email).Tel = phone
       member = oldMember
     } else {
       member = {
@@ -82,12 +87,6 @@ let generateIndivRFID = async () => {
     sendMail(member)
     activatedMembers.push(member)
     newPayements.push(payment)
-
-    // add member to fédération sheet
-    console.log('waiting 10s')
-    await delay(10000)
-    console.log('NEXT')
-    assignments.push(assignMember(member))
 
     console.log(`The payment ${member.Paiement.green} has been used to generate a RFID for ${firstName.blue} ${lastName.blue}\n`)
   }
