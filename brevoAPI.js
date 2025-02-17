@@ -6,6 +6,20 @@ const { default: axios } = require('axios')
 
 const { BREVO_API_KEY } = process.env
 
+let hasRFID = async (mail) => {
+  try {
+    const { data } = await axios.get(`https://api.brevo.com/v3/contacts/${mail}`, {
+      headers: {
+        Accept: 'application/json',
+        'api-key': BREVO_API_KEY,
+      },
+    })
+    return data.data.attributes.RFID
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 let updateContactwithRFID = async (mail, RFID) => {
   try {
     const { data } = await axios.put(
@@ -51,8 +65,14 @@ let createContact = async (player) => {
     )
   } catch (e) {
     if (e.response.data.message == 'Unable to create contact, email is already associated with another Contact') {
-      console.log('Contact already existing, updating RFID')
-      updateContactwithRFID(player.Mail, player.RFID)
+      console.log(`Contact ${player.Prénom} ${player.Nom} already existing, checking for RFID`)
+      let RFID = await hasRFID(player.Mail)
+      if (!RFID) {
+        console.log(`No RFID for ${player.Prénom} ${player.Nom}, updating contact`)
+        updateContactwithRFID(player.Mail, player.RFID)
+      } else {
+        console.log(`RFID already existing for ${player.Prénom} ${player.Nom}, skipping`)
+      }
     } else {
       {
         console.log('Brevo API error (not treated) :')
@@ -64,12 +84,17 @@ let createContact = async (player) => {
 }
 
 let sendMail = async (player) => {
+  let RFID = await hasRFID(player.Mail)
+  if (!RFID) {
+    console.log(`No RFID for ${player.Prénom} ${player.Nom}, updating contact`)
+    updateContactwithRFID(player.Mail, player.RFID)
+  }
   try {
     const { data } = await axios.post(
       'https://api.brevo.com/v3/smtp/email',
       {
         sender: {
-          name: 'Alex',
+          name: 'Roundnet France',
           email: 'roundnetfrance@gmail.com',
         },
         to: [
