@@ -56,7 +56,7 @@ let generateIndivRFID = async () => {
     let oldMember = RFIDS.find((m) => m.Mail == email)
 
     let member
-    if (oldMember) {
+    if (oldMember && !oldMember.actif) {
       RFIDS.find((m) => m.Mail == email).actif = true
       RFIDS.find((m) => m.Mail == email).Prénom = firstName
       RFIDS.find((m) => m.Mail == email).Nom = lastName
@@ -65,6 +65,9 @@ let generateIndivRFID = async () => {
       RFIDS.find((m) => m.Mail == email).Club = 'Fédération'
       RFIDS.find((m) => m.Mail == email).Tel = phone
       member = oldMember
+    } else if (oldMember && oldMember.actif) {
+      console.log(`The member ${firstName.red} ${lastName.red} is already active for the current year. Contact them & refund.\n`)
+      continue
     } else {
       member = {
         Id: globalId++,
