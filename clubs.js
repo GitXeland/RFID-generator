@@ -118,6 +118,7 @@ let generateClubRFID = async () => {
 
     //* If amount payed equals the number of RFID asked
     if (membersToRFID.length === nbRFID) {
+      let errorMembers = []
       let assignments = []
       for (let member of membersToRFID) {
         //* update member if already in database
@@ -136,6 +137,7 @@ let generateClubRFID = async () => {
           activatedMembers.push(member)
         } else if (oldMember && oldMember.actif) {
           console.log(`Member ${member.Prénom} ${member.Nom} already active in 2025, contact ${club} to warn the player.`)
+          errorMembers.push(member)
           continue
         } else {
           //* create new member
@@ -152,9 +154,15 @@ let generateClubRFID = async () => {
           await createContact(member)
         }
 
-        //* write RFID in the google sheet
-        await delay(3000)
-        assignments.push(assignRFID(member))
+        if (errorMembers.length > 0) {
+          console.log(`\nMembers from ${club} already active in 2025 :`)
+          console.table(errorMembers, ['Prénom', 'Nom', 'Mail'])
+          console.log(`Contact ${club} to fix the mistake.\n`)
+        } else {
+          //* write RFID in the google sheet
+          await delay(3000)
+          assignments.push(assignRFID(member))
+        }
       }
       await Promise.all(assignments)
 
