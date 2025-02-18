@@ -66,7 +66,7 @@ let generateIndivRFID = async () => {
       RFIDS.find((m) => m.Mail == email).Tel = phone
       member = oldMember
     } else if (oldMember && oldMember.actif) {
-      console.log(`The member ${firstName.red} ${lastName.red} is already active for the current year. Contact them & refund.\n`)
+      console.log(`The member ${firstName.red} ${lastName.red} is already active for the current year. Contact them & refund payment ${orderId.red}\n`)
       continue
     } else {
       member = {
