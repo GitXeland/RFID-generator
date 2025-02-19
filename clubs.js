@@ -52,6 +52,7 @@ let generateClubRFID = async () => {
   let newMembers = []
   let activatedMembers = []
   let newPayements = []
+  let membersToAssign = []
   for (let payment of notTreatedPayments) {
     //* Get payement info
     // console.log(payment)
@@ -119,7 +120,6 @@ let generateClubRFID = async () => {
     //* If amount payed equals the number of RFID asked
     if (membersToRFID.length === nbRFID) {
       let errorMembers = []
-      let assignments = []
       for (let member of membersToRFID) {
         //* update member if already in database
         let mail = member.Mail
@@ -154,23 +154,30 @@ let generateClubRFID = async () => {
           await createContact(member)
         }
 
-        if (errorMembers.length > 0) {
-          console.log(`\nMembers from ${club} already active in 2025 :`)
-          console.table(errorMembers, ['Prénom', 'Nom', 'Mail'])
-          console.log(`Contact ${club} to fix the mistake.\n`)
-        } else {
-          //* write RFID in the google sheet
+        membersToAssign.push(member)
+      }
+
+      if (errorMembers.length > 0) {
+        console.log(`\nMembers from ${club} already active in 2025 :`)
+        console.table(errorMembers, ['Prénom', 'Nom', 'Mail'])
+        console.log(`Contact ${club} to fix the mistake.\n`)
+      } else {
+        let assignments = []
+
+        //* write RFID in the google sheet
+        for (let member of membersToAssign) {
           await delay(3000)
           assignments.push(assignRFID(member))
         }
-      }
-      await Promise.all(assignments)
 
-      payment.time = new Date().toString()
-      payment.nbRFID = nbRFID
-      payment.club = club
-      newPayements.push(payment)
-      console.log(`The payment ${paymentID.green} from ${club.green} has been used to generate ${String(nbRFID).green} RFIDs\n`)
+        await Promise.all(assignments)
+
+        payment.time = new Date().toString()
+        payment.nbRFID = nbRFID
+        payment.club = club
+        newPayements.push(payment)
+        console.log(`The payment ${paymentID.green} from ${club.green} has been used to generate ${String(nbRFID).green} RFIDs\n`)
+      }
     } else {
       console.log(
         `The payment ${paymentID.red} from ${club.red} is too ${membersToRFID.length < nbRFID ? 'big' : 'small'} compared to the number of RFID requested.`
