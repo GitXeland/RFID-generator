@@ -14,7 +14,7 @@ let hasRFID = async (mail) => {
         'api-key': BREVO_API_KEY,
       },
     })
-    return data.data.attributes.RFID
+    return data.attributes.RFID
   } catch (e) {
     console.log(e)
   }
