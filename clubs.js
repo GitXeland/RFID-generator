@@ -77,9 +77,15 @@ let generateClubRFID = async () => {
 
     //* Find list of members getting a RFID
     let members = await getMembers(club)
-    members = members.filter((m) => m.Mail) //! il faut avoir un mail pour avoir une licence (RFID)
     let membersToRFID = members?.filter((m) => m.Paiement == paymentID)
     // console.table(membersToRFID)
+
+    //* Check that all members have a mail : else pass the club
+    let membersWithoutMail = members.filter((m) => !m.Mail) //! il faut avoir un mail pour avoir une licence (RFID)
+    if (membersWithoutMail.length !== 0) {
+      console.log(`Missing mails for ${club}, contact the club to fix the mistake.\n`)
+      continue
+    }
 
     //* Check that all members have a unique mail : else pass the club
     let duplicateMails = membersToRFID.filter((m) => membersToRFID.filter((m2) => m2.Mail == m.Mail).length > 1)
